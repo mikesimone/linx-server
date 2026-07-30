@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"mime"
 	"fmt"
 	"net/http"
 	"net/url"
@@ -14,6 +15,13 @@ import (
 	"github.com/andreimarcu/linx-server/httputil"
 	"github.com/zenazn/goji/web"
 )
+
+// Go's mime package does not know .webmanifest by default, which would
+// otherwise serve the icon manifest as text/plain - some browsers require
+// a JSON-ish content-type before treating a page as PWA-installable.
+func init() {
+	mime.AddExtensionType(".webmanifest", "application/manifest+json")
+}
 
 // errExpired distinguishes "this existed but its expiry passed" from a
 // plain backends.NotFoundErr, so handlers can show Config.expiredMessage
@@ -86,7 +94,7 @@ func staticHandler(c web.C, w http.ResponseWriter, r *http.Request) {
 		return
 	} else {
 		if path == "/favicon.ico" {
-			path = Config.sitePath + "/static/images/favicon.gif"
+			path = Config.sitePath + "static/icons/favicon.ico"
 		}
 
 		filePath := strings.TrimPrefix(path, Config.sitePath+"static/")

@@ -1,0 +1,19 @@
+services:
+  linx-server:
+    build: .
+    container_name: linx-server
+    restart: unless-stopped
+    ports:
+      - "8090:8080"
+    volumes:
+      - /mnt/bigdata/linx-server/files:/data/files
+      - /mnt/bigdata/linx-server/meta:/data/meta
+      - /var/lib/linx-server/authfile:/data/authfile:ro
+    command:
+      - "-sitename=mms.ihatemikesimone.com"
+      - "-siteurl=https://mms.ihatemikesimone.com/"
+      - "-maxexpiry=1209600"
+      - "-authfile=/data/authfile"
+      - "-cleanup-every-minutes=60"
+      - "-allowhotlink"
+      - "-expiredmessage=Should have clicked it sooner; Mike times these images out after 14 days."
