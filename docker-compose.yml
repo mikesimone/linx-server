@@ -6,8 +6,8 @@ services:
     ports:
       - "8090:8080"
     volumes:
-      - /mnt/bigdata/linx-server/files:/data/files
-      - /mnt/bigdata/linx-server/meta:/data/meta
+      - /mnt/nvme/linx-server/files:/data/files
+      - /mnt/nvme/linx-server/meta:/data/meta
       - /var/lib/linx-server/authfile:/data/authfile:ro
     command:
       - "-sitename=mms.ihatemikesimone.com"
