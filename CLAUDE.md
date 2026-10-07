@@ -1,0 +1,1 @@
+Read and follow `AGENTS.md` before working in this repository. Preserve Mike's local fork behavior and consult `mikesimone/signal-forwarder` plus `mikesimone/Environment` for current production integration details.
